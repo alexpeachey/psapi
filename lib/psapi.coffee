@@ -25,8 +25,6 @@ class Psapi
         context[key] = value
       for key, value of req.body
         context[key] = value
-      console.log req.body
-      console.log context
       status = status or 200
       res.status(status).json @executePayload(payload, context)
 
@@ -57,7 +55,6 @@ class Psapi
       data context
     else
       result
-
 
   typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
