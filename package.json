@@ -8,6 +8,10 @@
   },
   "author": "Originate Inc",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Originate/psapi.git"
+  },
   "dependencies": {
     "body-parser": "^1.12.3",
     "coffee-script": "^1.9.2",
