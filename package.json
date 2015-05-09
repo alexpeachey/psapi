@@ -4,7 +4,7 @@
   "description": "Pseudo Api Server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mycha ./spec"
   },
   "author": "Originate Inc",
   "license": "MIT",
@@ -18,5 +18,11 @@
   },
   "bin": {
     "psapi": "lib/psapi_cli.js"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mycha": "^0.8.2",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.7.0"
   }
 }

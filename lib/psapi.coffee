@@ -10,13 +10,13 @@ class Psapi
       {method, path, response, status} = route
       payload = @prepPayload response
       console.log "Registering route #{method} #{path}"
-      @app[method] path, @routeHandler(method, path, payload, status)
+      @app[method] path, @routeHandler(payload, status)
 
   listen: (port) ->
     console.log "Listening on #{port}"
     @app.listen port
 
-  routeHandler: (method, path, payload, status) =>
+  routeHandler: (payload, status) =>
     (req, res) =>
       context = {}
       for key, value of req.params
