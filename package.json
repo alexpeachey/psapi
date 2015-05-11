@@ -21,12 +21,18 @@
     "minimist": "^1.1.1"
   },
   "bin": {
-    "psapi": "lib/psapi_cli.js"
+    "psapi": "bin/psapi"
   },
   "devDependencies": {
     "chai": "^2.3.0",
+    "cross-spawn": "^0.4.0",
+    "cucumber": "^0.4.8",
+    "fs-extra": "^0.18.3",
     "mycha": "^0.8.2",
+    "path": "^0.11.14",
+    "request": "^2.55.0",
     "sinon": "^1.14.1",
-    "sinon-chai": "^2.7.0"
+    "sinon-chai": "^2.7.0",
+    "tmp": "^0.0.25"
   }
 }
