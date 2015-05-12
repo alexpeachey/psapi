@@ -1,4 +1,5 @@
 spawn = require 'cross-spawn'
+{wait} = require 'wait'
 
 
 module.exports = ->
@@ -33,7 +34,6 @@ module.exports = ->
   @Then /^the command exits with status (\d+)$/, (expected_exit_code, done) ->
     # In order to verify exit codes, we have to wait a bit longer,
     # so that the error event from the app has time to make it through the event loop.
-    callback = =>
+    wait 10, =>
       expect(@exit_code).to.equal parseInt(expected_exit_code)
       done()
-    setTimeout callback, 10
