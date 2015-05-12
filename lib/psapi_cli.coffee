@@ -8,24 +8,21 @@ routesFile = argv.routes || argv.r
 
 unless routesFile?
   console.log 'A routes file must be specified.'
-  process.exit -1
+  process.exit 1
 
 try
   routesContent = fs.readFileSync routesFile, 'UTF-8'
 catch e
   console.log 'Could not read routes file.'
-  console.log e
-  process.exit -2
-
-ext = path.extname routesFile
+  process.exit 2
 
 try
-  switch ext
+  switch path.extname(routesFile)
     when '.json' then routes = JSON.parse routesContent
     when '.cson' then routes = CSON.parse routesContent
 catch e
   console.log 'Could not parse routes.'
-  process.exit -3
+  process.exit 3
 
 
 psapi = new Psapi {routes}
