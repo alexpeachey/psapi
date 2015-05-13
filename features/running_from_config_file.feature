@@ -16,7 +16,7 @@ Feature: Running off a configuration file
       ]
       """
     When I run "psapi -r hello_world.cson"
-    And wait until I see "Listening on 5000"
+    And wait until I see "Listening at http://localhost:5000"
     Then a GET request to http://localhost:5000/hello succeeds and returns
       """
       "world"
@@ -36,7 +36,7 @@ Feature: Running off a configuration file
       ]
       """
     When I run "psapi -r hello_world.json"
-    And wait until I see "Listening on 5000"
+    And wait until I see "Listening at http://localhost:5000"
     Then a GET request to http://localhost:5000/hello succeeds and returns
       """
       "world"

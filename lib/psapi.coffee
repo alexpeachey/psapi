@@ -16,7 +16,7 @@ class Psapi
       @app[method] path, @routeHandler(payload, status)
 
   listen: (port) ->
-    console.log "Listening on #{chalk.cyan port}"
+    console.log "Listening at #{chalk.cyan 'http://localhost:'}#{chalk.cyan port}"
     @app.listen port
 
   routeHandler: (payload, status) =>
