@@ -19,9 +19,12 @@ module.exports = ->
 
   @When /^wait until I see "(.*)"$/, (expected_text, done) ->
     output = ''
+    found = no
     @process.stdout.on 'data', (data) ->
       output += data.toString()
-      done() if output.indexOf(expected_text) > -1
+      if output.indexOf(expected_text) > -1 and not found
+        found = yes
+        done()
 
 
   @Then /^I see "(.*)"$/, (expected_text, done) ->

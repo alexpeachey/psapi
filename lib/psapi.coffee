@@ -1,3 +1,6 @@
+chalk = require 'chalk'
+
+
 class Psapi
   constructor: ({routes, express, @Handlebars, parser}) ->
     express ?= require 'express'
@@ -9,11 +12,11 @@ class Psapi
     for route in routes
       {method, path, response, status} = route
       payload = @prepPayload response
-      console.log "Registering route #{method} #{path}"
+      console.log "Registering route #{chalk.green method} #{chalk.cyan path}"
       @app[method] path, @routeHandler(payload, status)
 
   listen: (port) ->
-    console.log "Listening on #{port}"
+    console.log "Listening on #{chalk.cyan port}"
     @app.listen port
 
   routeHandler: (payload, status) =>

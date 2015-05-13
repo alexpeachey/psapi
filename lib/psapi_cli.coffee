@@ -1,3 +1,5 @@
+chalk = require 'chalk'
+config = require '../package.json'
 fs = require 'fs'
 path = require 'path'
 CSON = require 'CSON'
@@ -25,5 +27,7 @@ catch e
   process.exit 3
 
 
+console.log chalk.bold "#{config.description} v#{config.version}\n"
 psapi = new Psapi {routes}
 psapi.listen port
+console.log "\nPress Ctrl-C to stop..."
