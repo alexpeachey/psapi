@@ -1,5 +1,7 @@
 # Pseudo API
 
+[![Build Status](https://travis-ci.org/Originate/psapi.svg?branch=master)](https://travis-ci.org/Originate/psapi)
+
 Create a mock api server suitable for testing API functionality.
 
 Create an array of objects defining your end points and then fire up the server.

@@ -4,7 +4,7 @@
   "description": "Pseudo Api Server",
   "main": "index.js",
   "scripts": {
-    "test": "mycha ./spec"
+    "test": "mycha ./spec && cucumber.js"
   },
   "author": "Originate Inc",
   "license": "MIT",

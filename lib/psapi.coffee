@@ -1,7 +1,7 @@
 class Psapi
   constructor: ({routes, express, @Handlebars, parser}) ->
     express ?= require 'express'
-    @Handlebars ?= require 'Handlebars'
+    @Handlebars ?= require 'handlebars'
     parser ?= require 'body-parser'
     @app = express()
     @app.use parser.urlencoded extended: no
