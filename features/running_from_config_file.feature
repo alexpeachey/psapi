@@ -9,7 +9,7 @@ Feature: Running off a configuration file
     Given I create a file "hello_world.cson" with the content
       """
       [
-        method: "get"
+        method: "GET"
         path: "/hello"
         status: 200
         response: "world"
@@ -28,7 +28,7 @@ Feature: Running off a configuration file
       """
       [
         {
-          "method": "get",
+          "method": "GET",
           "path": "/hello",
           "status": 200,
           "response": "world"

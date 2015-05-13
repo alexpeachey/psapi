@@ -12,8 +12,8 @@ class Psapi
     for route in routes
       {method, path, response, status} = route
       payload = @prepPayload response
-      console.log "Registering route #{chalk.green method} #{chalk.cyan path}"
-      @app[method] path, @routeHandler(payload, status)
+      console.log "Registering route #{chalk.green method.toUpperCase()} #{chalk.cyan path}"
+      @app[method.toLowerCase()] path, @routeHandler(payload, status)
 
   listen: (port) ->
     console.log "Listening at #{chalk.cyan 'http://localhost:'}#{chalk.cyan port}"
