@@ -34,7 +34,7 @@ module.exports = ->
       output += data.toString()
       if output.indexOf(expected_text) > -1 and not found
         found = yes
-        done()
+        process.nextTick done
 
 
   @Then /^I see "(.*)"$/, (expected_text, done) ->
