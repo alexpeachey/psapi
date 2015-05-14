@@ -5,16 +5,10 @@ Feature: Exit codes
   So that my workflows don't block on a misconfigured mock server.
 
 
-  Scenario: Missing routes file parameter
-    When I run "psapi"
-    Then I see "A routes file must be specified"
-    And the command exits with status 1
-
-
   Scenario: Non-existing routes file
-    When I run "psapi -r zonk.coffee"
-    Then I see "Could not read routes file"
-    And the command exits with status 2
+    When I run "psapi zonk.coffee"
+    Then I see "Could not read routes"
+    And the command exits with status 1
 
 
   Scenario: broken configuration file
@@ -24,7 +18,7 @@ Feature: Exit codes
         method:
       ]
       """
-    When I run "psapi -r broken.json"
+    When I run "psapi broken.json"
     Then I see "Could not parse routes"
-    And the command exits with status 3
+    And the command exits with status 2
 

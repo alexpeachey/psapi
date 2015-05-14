@@ -1,7 +1,6 @@
 spawn = require 'cross-spawn'
 {wait} = require 'wait'
 
-
 module.exports = ->
 
   @When /^I run "([^"]*)"$/, (full_command, done) ->
@@ -14,6 +13,18 @@ module.exports = ->
       console.log 'ERROR!'
       throw err
     @process.on 'exit', (@exit_code) =>
+    done()
+
+
+  @Given /^I pipe the following data into "([^"]*)"$/, (full_command, content, done) ->
+    [command, args...] = full_command.split ' '
+    command = @psapiPath if command is 'psapi'
+    @process = spawn command,
+                     args,
+                     cwd: @tmpDir
+    @process.stdout.pipe process.stdout
+    @process.stdin.write content
+    @process.stdin.end()
     done()
 
 
