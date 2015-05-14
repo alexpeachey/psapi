@@ -22,7 +22,6 @@ module.exports = ->
     @process = spawn command,
                      args,
                      cwd: @tmpDir
-    @process.stdout.pipe process.stdout
     @process.stdin.write content
     @process.stdin.end()
     done()
