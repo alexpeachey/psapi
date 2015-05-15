@@ -59,7 +59,7 @@ class Psapi
     else
       result
 
-  typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
+  typeIsArray = Array.isArray or ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
 
 module.exports = Psapi

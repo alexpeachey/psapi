@@ -4,7 +4,8 @@
   "description": "Pseudo Api Server",
   "main": "index.js",
   "scripts": {
-    "test": "mycha ./spec && cucumber.js"
+    "test": "npm run lint && mycha ./spec && cucumber.js",
+    "lint": "find . -name '*.coffee' -not -path './node_modules/*' | xargs coffeelint -f coffeelint_config.json"
   },
   "author": "Originate Inc",
   "license": "MIT",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "chai": "^2.3.0",
     "chalk": "^1.0.0",
+    "coffeelint": "^1.9.6",
     "cross-spawn": "^0.4.0",
     "cucumber": "^0.4.8",
     "fs-extra": "^0.18.3",

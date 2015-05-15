@@ -10,4 +10,4 @@ configuration.getRoutes (_, routes) ->
   console.log chalk.bold "#{config.description} v#{config.version}\n"
   psapi = new Psapi {routes}
   psapi.listen configuration.port
-  console.log "\nPress Ctrl-C to stop..."
+  console.log '\nPress Ctrl-C to stop...'
