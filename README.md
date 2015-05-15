@@ -42,12 +42,25 @@ Simply create a `json` or `cson` file defining your end points.
 ```
 
 Then fire up the server:
-`psapi -r routes.cson`
+`psapi routes.cson`
 
 You can now hit your API:
 `http://localhost:5000/books`
 
-## TODO
+The cli can also take piped input so if you have another program capable
+of generating the route configuration, you can pipe its output into the
+cli program. When using this mode, you can indicate what the format is.
+If you do not indicate the format, the `json` format will be assumed.
 
-* Build out feature specs
+`routeGenerator | psapi --format=cson`
 
+## Contributing
+
+Contributions to the project are welcomed and encouraged.
+If you would like to contribute:
+
+1. Fork the repository
+1. Create a feature specification for your change
+1. Add the functionality to satisfy the feature
+1. Verify all specs pass with `npm test`
+1. Open a Pull Request and reference any `Issue` you might be trying resolve
