@@ -10,5 +10,5 @@ console.log chalk.bold "#{config.description} v#{config.version}\n"
 configuration = new Configuration argv: minimist(process.argv.slice 2)
 configuration.getRoutes (_, routes) ->
   psapi = new Psapi {routes}
-  psapi.listen configuration.port
-  console.log '\nPress Ctrl-C to stop...'
+  psapi.listen configuration.port, ->
+    console.log '\nPress Ctrl-C to stop...'

@@ -17,9 +17,10 @@ class Psapi
       @_registerRoute route
 
 
-  listen: (port) ->
+  listen: (port, done) ->
     @app.listen port, ->
       console.log "Listening at #{chalk.cyan 'http://localhost:'}#{chalk.cyan port}"
+      done()
 
 
   _registerRoute: ({method, path, status, response}) ->
