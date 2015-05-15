@@ -12,65 +12,58 @@ describe 'Psapi', ->
       psapi.listen 5000
       expect(express.listen).to.have.been.calledWith 5000
 
-  describe '#prepPayload', ->
 
-    it 'returns a fuction producing an array of functions when given an array', ->
-      psapi = new Psapi routes: {}
-      input = ['a']
-      output = psapi.prepPayload input
-      expect(typeof output).to.eq 'function'
-      expect(output()[0]()).to.eq 'a'
+  describe '#_prepPayload', ->
+
+    beforeEach ->
+      @psapi = new Psapi routes: {}
+
+    afterEach ->
+      expect(typeof @output).to.be.a.function
+
+    it 'returns a function producing an array of functions when given an array', ->
+      @output = @psapi._prepPayload ['a']
+      expect(@output()[0]()).to.eq 'a'
 
     it 'returns a fuction producing an object of functions when given an object', ->
-      psapi = new Psapi routes: {}
-      input = a: 1
-      output = psapi.prepPayload input
-      expect(typeof output).to.eq 'function'
-      expect(output()['a']()).to.eq 1
+      @output = @psapi._prepPayload a: 1
+      expect(@output()['a']()).to.eq 1
 
     it 'uses handlebars to compile strings into functions', ->
-      psapi = new Psapi routes: {}
-      input = '{{a}}'
-      output = psapi.prepPayload input
-      expect(typeof output).to.eq 'function'
-      expect(output(a: 1)).to.eq '1'
+      @output = @psapi._prepPayload '{{a}}'
+      expect(@output(a: 1)).to.eq '1'
 
     it 'wraps everything else into a function', ->
-      psapi = new Psapi routes: {}
-      input = 1
-      output = psapi.prepPayload input
-      expect(typeof output).to.eq 'function'
-      expect(output()).to.eq 1
+      @output = @psapi._prepPayload 1
+      expect(@output()).to.eq 1
 
-  describe '#executePayload', ->
+
+  describe '#_executePayload', ->
+
+    beforeEach ->
+      @psapi = new Psapi routes: {}
 
     it 'executes functions in an array-based payload', ->
-      psapi = new Psapi routes: {}
-      input = ['a']
-      prepped = psapi.prepPayload input
-      output = psapi.executePayload prepped, {}
-      expect(output[0]).to.eq 'a'
+      prepped = @psapi._prepPayload ['a']
+      output = @psapi._executePayload prepped, {}
+      expect(output).to.eql ['a']
 
     it 'executes functions in an object-based payload', ->
-      psapi = new Psapi routes: {}
-      input = a: 1
-      prepped = psapi.prepPayload input
-      output = psapi.executePayload prepped, {}
-      expect(output['a']).to.eq 1
+      prepped = @psapi._prepPayload a: 1
+      output = @psapi._executePayload prepped, {}
+      expect(output).to.eql a: 1
 
     it 'provides a context to handlebars functions', ->
-      psapi = new Psapi routes: {}
-      input = '{{a}}'
-      prepped = psapi.prepPayload input
-      output = psapi.executePayload prepped, a: 1
+      prepped = @psapi._prepPayload '{{a}}'
+      output = @psapi._executePayload prepped, a: 1
       expect(output).to.eq '1'
 
-  describe '#routeHandler', ->
+
+  describe '#_createRequestHandler', ->
 
     it 'returns an express callback which returns the processed payload', ->
       psapi = new Psapi routes: {}
-      payload = psapi.prepPayload a: '{{a}}'
-      handler = psapi.routeHandler payload, 200
+      handler = psapi._createRequestHandler a: '{{a}}', 200
       expect(typeof handler).to.eq 'function'
       req =
         params:

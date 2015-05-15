@@ -4,10 +4,11 @@ Configuration = require './configuration.coffee'
 minimist = require 'minimist'
 Psapi = require './psapi.coffee'
 
-argv = minimist process.argv.slice 2
-configuration = new Configuration({argv})
+
+console.log chalk.bold "#{config.description} v#{config.version}\n"
+
+configuration = new Configuration argv: minimist(process.argv.slice 2)
 configuration.getRoutes (_, routes) ->
-  console.log chalk.bold "#{config.description} v#{config.version}\n"
   psapi = new Psapi {routes}
   psapi.listen configuration.port
   console.log '\nPress Ctrl-C to stop...'

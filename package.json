@@ -31,6 +31,7 @@
     "cross-spawn": "^0.4.0",
     "cucumber": "^0.4.8",
     "fs-extra": "^0.18.3",
+    "lodash": "^3.8.0",
     "mycha": "^0.8.2",
     "path": "^0.11.14",
     "request": "^2.55.0",

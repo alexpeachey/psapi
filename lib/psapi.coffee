@@ -1,65 +1,55 @@
+_ = require 'lodash'
 chalk = require 'chalk'
 
 
 class Psapi
+
   constructor: ({routes, express, @Handlebars, parser}) ->
     express ?= require 'express'
     @Handlebars ?= require 'handlebars'
     parser ?= require 'body-parser'
+
     @app = express()
     @app.use parser.urlencoded extended: no
     @app.use parser.json()
+
     for route in routes
-      {method, path, response, status} = route
-      payload = @prepPayload response
-      console.log "Registering route #{chalk.green method.toUpperCase()} #{chalk.cyan path}"
-      @app[method.toLowerCase()] path, @routeHandler(payload, status)
+      @_registerRoute route
+
 
   listen: (port) ->
     @app.listen port, ->
       console.log "Listening at #{chalk.cyan 'http://localhost:'}#{chalk.cyan port}"
 
-  routeHandler: (payload, status) =>
+
+  _registerRoute: ({method, path, status, response}) ->
+    console.log "Registering route #{chalk.green method.toUpperCase()} #{chalk.cyan path}"
+    @app[method.toLowerCase()] path,
+                               @_createRequestHandler(response, status)
+
+
+  _createRequestHandler: (response, status) =>
+    payload = @_prepPayload response
     (req, res) =>
-      context = {}
-      for key, value of req.params
-        context[key] = value
-      for key, value of req.query
-        context[key] = value
-      for key, value of req.body
-        context[key] = value
-      status = status or 200
-      res.status(status).json @executePayload(payload, context)
+      context = _.merge {}, req.params, req.query, req.body
+      res.status(status or 200).json @_executePayload(payload, context)
 
-  prepPayload: (data) ->
-    if typeIsArray data
-      result = (@prepPayload item for item in data)
-      -> result
-    else if typeof data is 'object'
-      processed = {}
-      for key, value of data
-        processed[key] = @prepPayload value
-      -> processed
-    else if typeof data is 'string'
-      @Handlebars.compile data
-    else
-      -> data
 
-  executePayload: (data, context) ->
+  _prepPayload: (data) ->
+    switch
+      when _.isArray data then => _.map data, (item) => @_prepPayload item
+      when _.isObject data then => _.mapValues data, (value) => @_prepPayload value
+      when _.isString data then @Handlebars.compile data
+      else -> data
+
+
+  _executePayload: (data, context) ->
     result = data context
-    if typeIsArray result
-      (@executePayload item, context for item in result)
-    else if typeof result is 'object'
-      processed = {}
-      for key, value of result
-        processed[key] = @executePayload value, context
-      processed
-    else if typeof result is 'function'
-      data context
-    else
-      result
+    switch
+      when _.isArray result then _.map result, (item) => @_executePayload item, context
+      when _.isObject result then _.mapValues result, (value) => @_executePayload value, context
+      else result
 
-  typeIsArray = Array.isArray or ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
 
 module.exports = Psapi
