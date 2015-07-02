@@ -1,4 +1,4 @@
-Psapi = require '../lib/psapi.coffee'
+Psapi = require '../src/psapi.coffee'
 
 describe 'Psapi', ->
 

@@ -1,0 +1,8 @@
+coffeelint_config.json
+CONTRIBUTING.md
+features/
+gulpfile.*
+mycha.*
+spec/
+src/
+tags

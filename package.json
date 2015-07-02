@@ -21,6 +21,9 @@
     "cross-spawn": "^0.4.0",
     "cucumber": "^0.4.8",
     "fs-extra": "^0.18.3",
+    "gulp": "^3.9.0",
+    "gulp-coffee": "^2.3.1",
+    "gulp-util": "^3.0.6",
     "lodash": "^3.8.0",
     "mycha": "^0.8.2",
     "path": "^0.11.14",
@@ -31,13 +34,18 @@
     "wait": "^0.1.0"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/psapi_cli.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Originate/psapi.git"
   },
   "scripts": {
+    "build": "gulp",
     "lint": "find . -name '*.coffee' -not -path './node_modules/*' | xargs coffeelint -f coffeelint_config.json",
+    "prepublish": "npm run build",
+    "postpublish": "git push && git push --tags",
+    "pretest": "npm run build",
+    "preversion": "npm test",
     "test": "npm run lint && mycha ./spec && cucumber.js"
   }
 }

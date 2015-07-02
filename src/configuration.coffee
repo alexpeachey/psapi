@@ -2,7 +2,7 @@ class Configuration
 
   constructor: ({argv, @CSON, @eventEmitterReader, @fs, @path}) ->
     @CSON ?= require 'CSON'
-    @eventEmitterReader ?= require './event_emitter_reader.coffee'
+    @eventEmitterReader ?= require './event_emitter_reader'
     @fs ?= require 'fs'
     @path ?= require 'path'
     @port = argv.port or argv.p or 5000

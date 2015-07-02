@@ -1,8 +1,8 @@
 chalk = require 'chalk'
 config = require '../package.json'
-Configuration = require './configuration.coffee'
+Configuration = require './configuration'
 minimist = require 'minimist'
-Psapi = require './psapi.coffee'
+Psapi = require './psapi'
 
 
 console.log chalk.bold "#{config.description} v#{config.version}\n"
