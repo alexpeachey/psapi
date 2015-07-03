@@ -6,8 +6,12 @@
 
 
 #### Run tests
-* run all specs: `npm test`
-* run a single spec: `mycha [path to spec file]`
+* run all automated tests: `npm test`
+* run only linters: `npm run lint`
+* run only unit tests: `npm run unit-tests`
+* run a single unit test: `mycha [path to spec file]`
+* run only feature specs: `npm run feature-tests`
+* run only a single feature spec: `cucumber-js <path to feature file>`
 
 
 #### Release a new version

@@ -41,11 +41,13 @@
   },
   "scripts": {
     "build": "gulp",
+    "feature-tests": "cucumber-js -f progress",
     "lint": "find . -name '*.coffee' -not -path './node_modules/*' | xargs coffeelint -f coffeelint_config.json",
     "prepublish": "npm run build",
     "postpublish": "git push && git push --tags",
     "pretest": "npm run build",
     "preversion": "npm test",
-    "test": "npm run lint && mycha ./spec && cucumber.js"
+    "test": "npm run lint && npm run unit-tests && npm run feature-tests",
+    "unit-tests": "mycha"
   }
 }
