@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  echo
+  tput bold
+  tput setaf 1
+  echo -n "  Error: "
+  tput sgr0
+  echo "Please call with the feature file name to run"
+  echo
+  echo -n "  Example: "
+  tput bold
+  echo "./cuke features/custom_port.feature"
+  echo
+  echo
+  exit 1
+fi
+
+./node_modules/.bin/cucumber-js --format pretty $*
+echo

@@ -1,6 +1,7 @@
 # Pseudo API
 
 [![Build Status](https://travis-ci.org/Originate/psapi.svg?branch=master)](https://travis-ci.org/Originate/psapi)
+[![Dependency Status](https://david-dm.org/Originate/psapi.svg)](https://david-dm.org/Originate/psapi)
 
 Create a mock api server suitable for testing API functionality.
 
